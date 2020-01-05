@@ -6,6 +6,7 @@ import { Layout } from './components/Layout';
 import { NavigationBar } from './components/NavigationBar';
 import { Home } from './Home';
 import { About } from './About';
+import AddProduct from './AddProduct';
 import "./App.css";
 
 class App extends Component {
@@ -75,6 +76,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/about" component={About} />
+              <Route path="/addproduct" component={AddProduct} />
             </Switch>
           </Layout>
         </Router>
