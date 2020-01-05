@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import getWeb3 from "./getWeb3";
-
+import { Layout } from './components/Layout';
+import { Home } from './Home';
+import { About } from './About';
 import "./App.css";
 
 class App extends Component {
@@ -55,6 +57,7 @@ class App extends Component {
     }
     return (
       <div className="App">
+        <Router>
         <h1>Good to Go!</h1>
         <p>Your Truffle Box is installed and ready.</p>
         <h2>Smart Contract Example!</h2>
@@ -66,6 +69,14 @@ class App extends Component {
           Try changing the value stored on <strong>line 40</strong> of App.js.
         </p>
         <div>The stored value is: {this.state.storageValue}</div>
+          <Layout>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/about" component={About} />
+            </Switch>
+          </Layout>
+        </Router>
+        
       </div>
     );
   }
