@@ -4,7 +4,7 @@ import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import getWeb3 from "./getWeb3";
 import { Layout } from './components/Layout';
 import { NavigationBar } from './components/NavigationBar';
-import { Home } from './Home';
+import Home from './Home';
 import { About } from './About';
 import AddProduct from './AddProduct';
 import ProductGrid from './ProductGrid';
