@@ -4,48 +4,66 @@ import './AddProduct.css';
 
 class AddProduct extends Component {
   
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      name: "",   
-      description: "",
-      price: "",
-      image: "",
-    }
+      form: {
+        name: "",   
+        description: "",
+        price: "",
+        image: "",
+      }
+    };
+    this.changeHandler = this.changeHandler.bind(this);
+    this.submitHandler = this.submitHandler.bind(this);
+  }
+
+  changeHandler(e) {
+    let store = this.state;
+    store.form[e.target.name] = e.target.value;
+    this.setState(store);
     
   }
 
-  handleSubmit(e) {
-    
+  submitHandler(e) { 
+    e.preventDefault();
+    alert(JSON.stringify(this.state.form));
+    // Submit to blockchain here
+
+    // fetch('/messages', { 
+    //   method: 'POST', 
+    //   headers: { 'Content-Type': 'application/json' }, 
+    //   data: JSON.stringify(this.state.form) 
+    // });
   }
-  
+
   render() {
+    const { form } = this.state;
     return (
       <div>
-        Name: {this.state.name}
-        <Form onSubmit={this.handleSubmit.bind(this)}>
-            <Form.Group controlId="formGroupName">
-                <Form.Label>Name</Form.Label>
-                <Form.Control type="text" placeholder="Enter Product Name" 
-                onChanged={(text)=> this.setState({name: text})}
-                />
-            </Form.Group>
-            <Form.Group controlId="formGroupDescription">
-                <Form.Label>Description</Form.Label>
-                <Form.Control type="textarea" placeholder="Enter Product Description" />
-            </Form.Group>
-            <Form.Group controlId="formGroupPrice">
-                <Form.Label>Price</Form.Label>
-                <Form.Control type="text" placeholder="Enter Price" maxLength="5" />
-            </Form.Group>
-            <Form.Group controlId="formGroupImage">
-                <Form.Label>Image</Form.Label>
-                <Form.Control type="file" />
-            </Form.Group>
-            <Button variant="primary" type="submit" onSubmit="this.onSubmit().bind(this)">
-                Submit
-            </Button>
-            </Form>
+       <form onSubmit={this.submitHandler} >
+       <div class="form-group">
+        <label for="name">Name:</label>
+        <input name="name" type="text" required maxLength="30" class="form-control" value={form.name} onChange={this.changeHandler}/> 
+       </div>
+       <div class="form-group">
+        <label for="name">Image:</label>
+        <input name="image"  class="form-control" type="file" />
+       </div>
+       <div class="form-group">
+        <label for="name">Price:</label>
+        <input name="price" pattern="\d+(\.\d{2})?" type="text" class="form-control" value={form.price} onChange={this.changeHandler}/>
+       </div>
+       <div class="form-group">
+        <label for="name">Description:</label>
+        <textarea name="description" class="form-control" value={form.description} rows="8" onChange={this.changeHandler}></textarea>
+       </div>
+       <div class="form-group">
+       <button type="button" class="btn btn-primary" onClick={this.submitHandler}>Add Product</button>
+       </div>
+    </form>
+    
+        
       </div>
     );
   }
