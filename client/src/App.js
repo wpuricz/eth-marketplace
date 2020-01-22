@@ -9,6 +9,7 @@ import { About } from './About';
 import AddProduct from './AddProduct';
 import ProductGrid from './ProductGrid';
 import Profile from './Profile';
+import Register from './Register';
 import "./App.css";
 
 class App extends Component {
@@ -83,6 +84,7 @@ class App extends Component {
               <Route path="/addproduct" component={AddProduct} />
               <Route path="/grid" component={ProductGrid} />
               <Route path="/profile" component={Profile} />
+              <Route path="/register" component={Register} />
             </Switch>
           </Layout>
         </Router>
