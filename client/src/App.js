@@ -8,6 +8,7 @@ import Home from './Home';
 import { About } from './About';
 import AddProduct from './AddProduct';
 import ProductGrid from './ProductGrid';
+import Profile from './Profile';
 import "./App.css";
 
 class App extends Component {
@@ -81,6 +82,7 @@ class App extends Component {
               <Route path="/about" component={About} />
               <Route path="/addproduct" component={AddProduct} />
               <Route path="/grid" component={ProductGrid} />
+              <Route path="/profile" component={Profile} />
             </Switch>
           </Layout>
         </Router>
