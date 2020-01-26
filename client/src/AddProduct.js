@@ -14,8 +14,7 @@ class AddProduct extends Component {
         image: "",
       }
     };
-    this.changeHandler = this.changeHandler.bind(this);
-    this.submitHandler = this.submitHandler.bind(this);
+    
   }
 
   changeHandler(e) {
@@ -41,7 +40,7 @@ class AddProduct extends Component {
     const { form } = this.state;
     return (
       <div>
-       <form onSubmit={this.submitHandler} >
+       <form onSubmit={this.submitHandler.bind(this)} >
        <div class="form-group">
         <label for="name">Name:</label>
         <input name="name" type="text" required maxLength="30" class="form-control" value={form.name} onChange={this.changeHandler}/> 
@@ -56,10 +55,10 @@ class AddProduct extends Component {
        </div>
        <div class="form-group">
         <label for="name">Description:</label>
-        <textarea name="description" class="form-control" value={form.description} rows="8" onChange={this.changeHandler}></textarea>
+        <textarea name="description" class="form-control" value={form.description} rows="8" onChange={this.changeHandler.bind(this)}></textarea>
        </div>
        <div class="form-group">
-       <button type="button" class="btn btn-primary" onClick={this.submitHandler}>Add Product</button>
+       <button type="button" class="btn btn-primary" onClick={this.submitHandler.bind(this)}>Add Product</button>
        </div>
     </form>
     

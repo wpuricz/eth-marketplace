@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 import UserContract from './contracts/Users.json'
 import getWeb3 from './getWeb3'
+import Users from './users';
+import { Accounts } from 'web3-eth-accounts';
 
 class Register extends Component {
     constructor(props) {
@@ -12,7 +14,7 @@ class Register extends Component {
     }
 
     async componentDidMount() {
-        try {
+        /*try {
             // Get network provider and web3 instance.
             const web3 = await getWeb3();
 
@@ -36,7 +38,9 @@ class Register extends Component {
                 `Failed to load web3, accounts, or contract. Check console for details.`,
             );
             console.error(error);
-        }
+        }*/
+
+        
     }
 
     handleChange(event) {
@@ -45,16 +49,25 @@ class Register extends Component {
 
     async register(event) {
         // call create user here
-        const { accounts, contract } = this.state;
-
+        //const { accounts, contract } = this.state;
+        
         // Stores a given value, 5 by default.
-        const username = this.state.web3.utils.fromAscii(this.state.username);
-        await contract.methods.create(username).send({ from: accounts[0], gas:2000000 });
+        const user = new Users();
+        let uresponse;
+        try{
+            uresponse = await user.create(this.state.username);
+            console.log(uresponse);
+        }catch(e) {
+            console.log("Error:" + e);
+        }
+        //const username = this.state.web3.utils.fromAscii(this.state.username);
+        //await contract.methods.create(username).send({ from: accounts[0], gas:2000000 });
+        //const response = await user.authenticate();
 
         // Get the value from the contract by account to prove it worked.
-        const response = await contract.methods.get(accounts[0]).call();
+        //const response = await contract.methods.get(accounts[0]).call();
 
-        alert(JSON.stringify(response));
+        //alert(JSON.stringify(response));
         // Update state with the result.
         //this.setState({ storageValue: response });
         alert("user submitted:" + this.state.username);

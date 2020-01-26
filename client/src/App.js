@@ -12,10 +12,15 @@ import Profile from './Profile';
 import Register from './Register';
 import "./App.css";
 
+
 class App extends Component {
   state = { storageValue: 0, web3: null, accounts: null, contract: null };
 
   componentDidMount = async () => {
+    
+    //const user = new Users();
+
+    
     /*try {
       // Get network provider and web3 instance.
       const web3 = await getWeb3();
