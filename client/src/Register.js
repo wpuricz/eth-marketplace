@@ -9,11 +9,14 @@ class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username:''
+            username:'',
+            account: null
             }
     }
 
     async componentDidMount() {
+        
+
         /*try {
             // Get network provider and web3 instance.
             const web3 = await getWeb3();
@@ -60,17 +63,21 @@ class Register extends Component {
         }catch(e) {
             console.log("Error:" + e);
         }
-        //const username = this.state.web3.utils.fromAscii(this.state.username);
-        //await contract.methods.create(username).send({ from: accounts[0], gas:2000000 });
-        //const response = await user.authenticate();
+        
+        let response;
+        try{
+            response = await user.exists(user.accounts[0]);
+        }catch(e) {
+            console.log("Error Auth:" + e);
+        }
 
         // Get the value from the contract by account to prove it worked.
         //const response = await contract.methods.get(accounts[0]).call();
 
-        //alert(JSON.stringify(response));
+        alert(JSON.stringify(response));
         // Update state with the result.
         //this.setState({ storageValue: response });
-        alert("user submitted:" + this.state.username);
+        //alert("user submitted:" + this.state.username);
         event.preventDefault();
     }
 
