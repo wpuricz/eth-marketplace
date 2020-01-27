@@ -22,8 +22,8 @@ contract Products {
         //require - validation of params
         Product memory product;
         product.index = productIndex.push(productIndex.length)-1;
-        product.description = _description;
         product.name = _name;
+        product.description = _description;
         product.imageHash = _imageHash;
         product.price = _price;
         product.user = msg.sender;
@@ -33,10 +33,10 @@ contract Products {
         return productIndex.length - 1;
     }
 
-    function getProduct(uint _index) public view returns( bytes32 description, bytes32 name, bytes32 imageHash, uint price) {
+    function getProduct(uint _index) public view returns( bytes32 name, bytes32 description, bytes32 imageHash, uint price) {
         return(
-            productMap[_index].description,
             productMap[_index].name,
+            productMap[_index].description,
             productMap[_index].imageHash,
             productMap[_index].price
             );
@@ -60,8 +60,8 @@ contract Products {
             Product memory product;
             product = products[i];
 
-            descriptions[i] = product.description;
             names[i] = product.name;
+            descriptions[i] = product.description;
             users[i] = product.user;
             prices[i] = uint(product.price);
         }

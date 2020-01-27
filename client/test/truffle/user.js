@@ -4,18 +4,14 @@ var Users = artifacts.require("./Users.sol");
 contract('Users', function(accounts) {
     beforeEach('setup contract for each test', async function () {
         instance = await Users.deployed()
-        sender = {from: web3.eth.accounts[0], gas: 2000000}
+        sender = {from: accounts[0], gas: 2000000}
     })
-
-    // it('it should create an object', function () {
-    //     console.log(web3.eth.accounts[1]);
-    //     assert.ok(u.address);   
-    // });
 
     it('it should create a user', async () => {
         let username = web3.utils.fromAscii('will')
+        console.log(`username:${username}`);
         try{
-            let response = await instance.create(username,{from: web3.eth.accounts[0], gas: 2000000})
+            let response = await instance.create(username,sender);
             assert(true)
         }catch(err) {
             console.log(err);
@@ -24,9 +20,20 @@ contract('Users', function(accounts) {
     });
 
     it('it should check if a user exists', async () => {
-        let address = web.eth.accounts[0];
+        let address = accounts[0];
         try{
-            await instance.exists.call(address,sender);
+            await instance.exists(address,sender);
+            assert(true);
+        }catch(e) {
+            console.log(e);
+            assert(false);
+        }
+    })
+
+    it('it should get a user by address', async() => {
+        let response;
+        try{
+            response = await instance.get(accounts[0]);
             assert(true);
         }catch(e) {
             console.log(e);

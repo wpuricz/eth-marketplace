@@ -8,6 +8,7 @@ class Users {
     this.contract = null;
     this.accounts = null;
     this.web3 = null;
+    this.sender = null;
     
   }
 
@@ -16,7 +17,6 @@ class Users {
     const userContract = TruffleContract(UserContract);
     userContract.setProvider(this.web3.currentProvider);
     this.contract = await userContract.deployed();
-    //this.accounts = await this.web3.eth.getAccounts();
     this.accounts = await this.web3.eth.getAccounts();
     this.sender = {from: this.accounts[0], gas: 2000000};
     console.log(this.accounts);
@@ -35,7 +35,7 @@ class Users {
       await this.init();
     }
     console.log(address);
-    return await this.contract.exists.call(address || this.web3.eth.defaultAccount, this.sender);
+    return await this.contract.exists.call(address, this.sender);
   }
 
   async create(username) {    
