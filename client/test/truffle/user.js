@@ -15,13 +15,24 @@ contract('Users', function(accounts) {
     it('it should create a user', async () => {
         let username = web3.utils.fromAscii('will')
         try{
-            let response = await instance.create(username,{from: web3.eth.accounts[0]})
+            let response = await instance.create(username,{from: web3.eth.accounts[0], gas: 2000000})
             assert(true)
         }catch(err) {
             console.log(err);
             assert(false)
         }
     });
+
+    it('it should check if a user exists', async () => {
+        let address = web.eth.accounts[0];
+        try{
+            await instance.exists.call(address,sender);
+            assert(true);
+        }catch(e) {
+            console.log(e);
+            assert(false);
+        }
+    })
 
     it('it should get user count', async () => {
         let response = await instance.getUserCount();
